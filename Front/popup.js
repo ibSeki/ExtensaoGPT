@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  
+
   processButton.addEventListener("click", async () => {
     const videoUrl = videoUrlInput.value.trim();
     const language = languageSelect.value;
