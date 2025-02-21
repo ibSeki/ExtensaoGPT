@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Video Processor - GPT",
+  "version": "1.0",
+  "description": "Extensão que processa vídeos do YouTube e extrai tópicos.",
+  "permissions": [
+  "activeTab",
+  "tabs"
+],
+  "host_permissions": [
+  "http://127.0.0.1:5000/*",
+  "https://www.youtube.com/*"
+],
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "128": "icon.png"
+  }
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Processar Vídeo</title>
+</head>
+<body>
+  <div id="container">
+    <h1>🎥 Processar Vídeo</h1>
+
+    <label for="video-url">📌 URL do Vídeo:</label>
+    <input type="text" id="video-url" placeholder="Digite a URL do vídeo" />
+
+    <label for="language">🌍 Escolha o Idioma:</label>
+    <select id="language">
+      <option value="en">Inglês</option>
+      <option value="pt">Português</option>
+    </select>
+
+    <label for="num-topicos">📑 Quantidade de Tópicos:</label>
+    <select id="num-topicos">
+      <option value="5">5</option>
+      <option value="7" selected>7</option>
+      <option value="10">10</option>
+    </select>
+
+    <button id="process-button">Processar</button>
+    <div id="response"></div>
+    <div id="spinner" class="spinner" style="display: none;"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
