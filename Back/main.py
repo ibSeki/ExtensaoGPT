@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from transcricao import download_audio_from_youtube, upload_audio, transcribe_audio, delete_audio_file
+from transcricao import download_audio_from_youtube, transcribe_audio, delete_audio_file
 from topicos import extract_topics_with_gpt
 from dotenv import load_dotenv
 import os
@@ -20,10 +20,9 @@ CORS(app)
 def process_video():
     data = request.json
     video_url = data.get("video_url")
-    language = data.get("language")
     num_topicos = data.get("num_topicos", 7)  # Padrão é 7 se não for enviado
 
-    if not video_url or not language:
+    if not video_url:
         return jsonify({"error": "URL do vídeo ou idioma não fornecido."}), 400
 
     # Processar o vídeo
@@ -31,12 +30,8 @@ def process_video():
     if not audio_file:
         return jsonify({"error": "Erro ao baixar o áudio do vídeo."}), 500
 
-    audio_url = upload_audio(audio_file)
-    if not audio_url:
-        delete_audio_file(audio_file)
-        return jsonify({"error": "Erro ao fazer upload do áudio."}), 500
+    transcription = transcribe_audio(audio_file)
 
-    transcription = transcribe_audio(audio_url, language)
     if not transcription:
         delete_audio_file(audio_file)
         return jsonify({"error": "Erro ao transcrever o áudio."}), 500
