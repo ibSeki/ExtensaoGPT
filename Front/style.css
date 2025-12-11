@@ -1,146 +1,229 @@
-/* Estilo geral */
+/* ------------------------------
+   Base / Theme
+-------------------------------- */
+:root {
+  --bg: #0b0c10;
+  --panel: #111318;
+  --panel-2: #151923;
+  --text: #e6e9ef;
+  --muted: #a7adbb;
+  --primary: #6ea8fe;
+  --primary-strong: #4f8bff;
+  --danger: #ff6b6b;
+  --success: #2ecc71;
+  --ring: rgba(110, 168, 254, 0.45);
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 10px 30px rgba(0,0,0,.45);
+  --shadow-soft: 0 5px 15px rgba(0,0,0,.25);
+  --border: 1px solid rgba(255,255,255,.06);
+}
+
+/* Reset leve */
+* { box-sizing: border-box; }
+
 body {
-  font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
-  text-align: center;
-  background-color: #f4f4f9;
+  width: 360px;              /* popup mais confortável */
+  min-height: 260px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, #1b2140 0%, transparent 55%),
+    radial-gradient(900px 600px at 110% 0%, #1a3b4a 0%, transparent 60%),
+    var(--bg);
+  color: var(--text);
+  display: grid;
+  place-items: start center;
 }
 
-/* Container principal */
+/* ------------------------------
+   Container
+-------------------------------- */
 #container {
-  padding: 20px;
-  width: 300px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 14px;
+  width: calc(100% - 28px);
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 16px 14px;
   text-align: left;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Título */
+/* detalhe sutil no topo */
+#container::before {
+  content: "";
+  position: absolute;
+  inset: -40% -20% auto -20%;
+  height: 140px;
+  background: radial-gradient(closest-side, rgba(110,168,254,.22), transparent 70%);
+  pointer-events: none;
+}
+
+/* ------------------------------
+   Title
+-------------------------------- */
 h1 {
+  margin: 6px 0 14px;
   font-size: 18px;
-  color: #333;
-  margin-bottom: 15px;
+  font-weight: 700;
+  letter-spacing: .2px;
   text-align: center;
 }
 
-/* Labels */
+/* ------------------------------
+   Labels
+-------------------------------- */
 label {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
   display: block;
-  margin-top: 10px;
+  margin: 10px 0 6px;
+  letter-spacing: .3px;
+  text-transform: uppercase;
 }
 
-/* Inputs e Selects */
-input, select, button {
-  margin: 5px 0 10px;
-  padding: 10px;
-  font-size: 14px;
+/* ------------------------------
+   Inputs / Select
+-------------------------------- */
+input, select {
   width: 100%;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 11px 12px;
+  border-radius: var(--radius-sm);
+  border: var(--border);
+  background: rgba(255,255,255,.03);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .05s ease;
 }
 
-/* Estilo para os selects com setinha */
+input::placeholder { color: rgba(167,173,187,.7); }
+
+input:focus, select:focus {
+  border-color: rgba(110,168,254,.65);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* Select moderno com seta inline */
 select {
   appearance: none;
-  background-color: #fff;
-  cursor: pointer;
-  padding-right: 30px; /* Espaço para a setinha */
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='gray'><path fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/></svg>");
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 15px;
-}
-
-/* Botão */
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+  padding-right: 34px;
   cursor: pointer;
-  font-weight: bold;
 }
 
-button:hover {
-  background-color: #0056b3;
-  transition: 0.3s;
+/* ------------------------------
+   Button
+-------------------------------- */
+button#process-button {
+  margin-top: 8px;
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  border: none;
+  border-radius: 12px;
+  color: #0b1020;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-strong) 100%);
+  box-shadow: 0 8px 18px rgba(79,139,255,.35);
+  cursor: pointer;
+  transition: transform .06s ease, filter .2s ease, box-shadow .2s ease;
 }
 
-/* Área de resposta */
+button#process-button:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 10px 22px rgba(79,139,255,.45);
+}
+
+button#process-button:active {
+  transform: translateY(1px) scale(0.995);
+}
+
+/* ------------------------------
+   Response box
+-------------------------------- */
 #response {
-  max-height: none;
-  overflow-y: visible;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: var(--border);
+  background: rgba(0,0,0,.25);
+  box-shadow: var(--shadow-soft);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text);
+  max-height: 280px;
+  overflow-y: auto;
 }
 
-/* Título dos tópicos */
-.success {
-  color: #28a745;
-  font-weight: bold;
+/* Scrollbar */
+#response::-webkit-scrollbar { width: 10px; }
+#response::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.04);
+  border-radius: 999px;
+}
+#response::-webkit-scrollbar-thumb {
+  background: rgba(110,168,254,.5);
+  border-radius: 999px;
 }
 
-.error {
-  color: #dc3545;
-  font-weight: bold;
-}
-
-/* Spinner (Carregamento) */
-.spinner {
-  margin-top: 10px;
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border: 4px solid rgba(0, 123, 255, 0.3);
-  border-top-color: #007bff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-      transform: rotate(360deg);
-  }
-}
-
-/* Lista numerada de tópicos */
+/* Lista nos resultados */
 #response ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
-  margin: 10px 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
 }
 
 #response ul li {
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.5;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.03);
+  border: var(--border);
 }
 
 #response ul li strong {
-  color: #007bff;
-  font-weight: bold;
+  color: var(--primary);
+  font-weight: 800;
 }
 
-/* Ajuste para evitar sobreposição */
-#language, #num-topicos {
-  margin-bottom: 15px;
-  z-index: 1;
-  appearance: none;
-  background-color: #fff;
+/* Sucesso / Erro */
+.success { color: var(--success); font-weight: 800; }
+.error { color: var(--danger); font-weight: 800; }
+
+/* ------------------------------
+   Spinner
+-------------------------------- */
+.spinner {
+  margin: 10px auto 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 3px solid rgba(110,168,254,.2);
+  border-top-color: var(--primary);
+  animation: spin .9s linear infinite;
+  filter: drop-shadow(0 2px 6px rgba(110,168,254,.5));
 }
 
-/* Ajuste de foco */
-#language:focus, #num-topicos:focus {
-  outline: none;
-  border-color: #007bff;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
+
+/* Ajustes extras */
+#num-topicos { margin-bottom: 6px; }
